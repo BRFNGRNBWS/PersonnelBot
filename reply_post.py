@@ -93,13 +93,13 @@ for submission in subreddit.hot(limit=10):
 				comment.reply(comrep)
 
 				#log output, including parent post info
-				logout = "\n\n" + color.BLUE + color.BOLD + str(datetime.now()) + color.END + color.END + " | " + color.GREEN + "successfully replied to comment" + color.END + " \"" + body + color.CYAN + "\", comment id: " + color.END + comment.id + ", post \"" + submission.title + color.CYAN + "\", post id: " + color.END + submission.id + "with \"" + comrep
+				logout = "\n\n" + color.BLUE + color.BOLD + str(datetime.now()) + color.END + color.END + " | " + color.GREEN + "successfully replied to comment" + color.END + " \"" + body + color.CYAN + "\", comment id: " + color.END + comment.id + ", post \"" + submission.title + color.CYAN + "\", post id: " + color.END + submission.id + " with \"" + comrep
 				log.write(logout)
 
 				#comments_replied_to.txt output
 				comments_replied_to.append(comment.id)
-				with open("comments_replied_to.txt", "w") as q:
-							q.write(comment_id + "\n\n")
+				with open("comments_replied_to.txt", "a") as q:
+					q.write(comment.id + "\n\n")
 			
 			#for time limit or other exceptions
 			except:
