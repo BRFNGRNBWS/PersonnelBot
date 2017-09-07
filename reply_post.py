@@ -26,6 +26,9 @@ two = "nothing personal kid"
 three = "Nothing personal, kid"
 four = "nothing personal, kid"
 
+postrep = "[*personnel](http://i.imgur.com/xAEucNL.jpg)"
+comrep = "[*personnel](http://i.imgur.com/xAEucNL.jpg)"
+
 #opens posts_replied_to.txt and stuff
 if not os.path.isfile("posts_replied_to.txt"):
 	posts_replied_to = []
@@ -56,7 +59,6 @@ for submission in subreddit.hot(limit=10):
 	if re.search("Nothing personal, kid", submission.title, re.IGNORECASE) and submission not in posts_replied_to:
 		try:
 			#reply
-			postrep = "*personnel"
 			submission.reply(postrep)
 
 			#log output
@@ -85,11 +87,10 @@ for submission in subreddit.hot(limit=10):
 		body = comment.body
 		
 		#searches comments for personal
-		if (one in body or two in body or three in body or four in body) and (comment not in comments_replied_to):
+		if (re.search(one, body, re.IGNORECASE) or re.search(three, body, re.IGNORECASE)) and (comment not in comments_replied_to):
 			
 			try:
 				#reply
-				comrep = "*personnel"
 				comment.reply(comrep)
 
 				#log output, including parent post info
